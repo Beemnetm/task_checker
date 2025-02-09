@@ -1,3 +1,5 @@
+// File: android/app/build.gradle
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -5,10 +7,10 @@ plugins {
 }
 
 android {
-    namespace "com.example.task_checker"
+    namespace "com.example.task_checker" // Ensure this matches your app's package
     compileSdk 33
-    ndkVersion "25.1.8937393"
 
+    // Remove ndkVersion if not needed (AGP will auto-select)
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -19,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.task_checker"
+        applicationId "com.example.task_checker" // Must match namespace
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -30,11 +32,20 @@ android {
         debug {
             storeFile file("debug.keystore")
         }
+        release {
+            storeFile file("release.keystore")
+            storePassword "your_password"
+            keyAlias "your_alias"
+            keyPassword "your_password"
+        }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
