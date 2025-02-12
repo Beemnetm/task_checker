@@ -45,6 +45,14 @@ class _TodoViewState extends State<TodoView> {
     final todoCubit = context.read<TodoCubit>();
 
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "TO DO TASK",
+          ),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _showAddTodoBox(context),
